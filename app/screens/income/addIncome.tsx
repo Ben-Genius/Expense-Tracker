@@ -9,13 +9,13 @@ import {
   Image,
 } from "react-native";
 import { COLOURS } from "@/constant/color";
-import { IconSymbol } from "@/components/IconSymbol";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
 import DateTimePicker from "react-native-ui-datepicker";
 import dayjs from "dayjs";
 import * as ImagePicker from "expo-image-picker";
 import { DateSelector } from "@/components/stats/dateSelector";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const categories = [
   "Salary",
@@ -113,7 +113,7 @@ export default function AddIncome() {
           style={styles.dateButton}
           onPress={() => setShowDatePicker(!showDatePicker)}
         >
-          <IconSymbol name="calendar" size={20} color={COLOURS.primary} />
+          <MaterialCommunityIcons name="calendar" size={20} color={COLOURS.primary} />
           <Text style={styles.dateText}>
             {selectedDate.format("MMMM D, YYYY")}
           </Text>
@@ -129,7 +129,8 @@ export default function AddIncome() {
         )}
 
         <TouchableOpacity style={styles.uploadButton} onPress={pickImage}>
-          <IconSymbol name="doc.fill" size={20} color={COLOURS.primary} />
+        
+          <MaterialCommunityIcons name="file-document" size={20} color={COLOURS.primary} />
           <Text style={styles.uploadText}>Add Receipt/Documents</Text>
         </TouchableOpacity>
 

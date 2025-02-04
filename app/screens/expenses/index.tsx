@@ -10,9 +10,10 @@ import {
 import { COLOURS } from "@/constant/color";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import TransactionCard from "@/components/home/transactionCard";
-import { IconSymbol } from "@/components/IconSymbol";
+
 import { useFocusEffect, useRouter } from "expo-router";
 import { manageExpensesData } from "@/utils/storage";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 interface Expense {
   id: string;
@@ -24,19 +25,27 @@ interface Expense {
 }
 
 const categoryIcons = {
-  Bills: "dollarsign.circle.fill",
-  Health: "heart.fill",
-  Education: "book.fill",
+  Bills: "cash",
+  Health: "heart",
+  Education: "book",
   Travel: "airplane",
-  Entertainment: "tv.fill",
-  Shopping: "cart.fill",
-  Groceries: "basket.fill",
-  Transport: "car.fill",
+  Entertainment: "television",
+  Shopping: "cart",
+  Groceries: "basket",
+  Transport: "car",
   Food: "fork.knife",
   Utilities: "bolt.fill",
   Insurance: "shield.fill",
   Clothing: "tshirt.fill",
   Other: "plus.circle.fill",
+  Bonus: "star",
+  Freelance: "laptop",
+  "Rental Income": "home",
+  Salary: "cash-multiple",
+  Investments: "chart-line-variant",
+  Business: "office-building",
+  Gift: "gift",
+  Consulting: "account-group",
 } as const;
 
 const categoryColors = {
@@ -90,26 +99,20 @@ useFocusEffect(
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <View style={styles.titleWrapper}>
-          <IconSymbol
-            name="chart.line.downtrend.xyaxis.circle"
-            color={COLOURS.primary}
-            size={24}
-          />
+  
+          <MaterialCommunityIcons name="chart-scatter-plot-hexbin" size={24} color={COLOURS.primary} />
           <Text style={styles.titleText}>All Expenses</Text>
         </View>
         <TouchableOpacity
           style={styles.addButton}
           onPress={() => router.push("/screens/expenses/addExpense")}
         >
-          <IconSymbol
-            name="plus.circle.fill"
-            color={COLOURS.primary}
-            size={30}
-          />
+ 
+          <MaterialCommunityIcons name="plus-circle" size={24} color={COLOURS.primary} />
         </TouchableOpacity>
       </View>
 
-      <ScrollView>
+      <ScrollView style={{marginHorizontal:19}}>
         {expenses.map((item) => (
           <TransactionCard
             key={item.id}

@@ -10,8 +10,9 @@ import { COLOURS } from "@/constant/color";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import TransactionCard from "@/components/home/transactionCard";
 import { expenseData, incomeData } from "@/constant/dummy_data";
-import { IconSymbol } from "@/components/IconSymbol.ios";
+
 import { router } from "expo-router";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function RecentTransactions() {
   const [transactions, setTransactions] = useState([]);
@@ -27,28 +28,28 @@ export default function RecentTransactions() {
   
     setTransactions(recentTransactions as React.SetStateAction<never[]>);
   }, []);
-  const getCategoryIcon = (category: string): string => {
-    const iconMap = {
-      Bills: "dollarsign.circle.fill",
-      Health: "heart.fill",
-      Education: "book.fill",
-      Travel: "airplane",
-      Entertainment: "tv.fill",
-      Shopping: "cart.fill",
-      Groceries: "basket.fill",
-      Transport: "car.fill",
-      Bonus: "star.fill",
-      Freelance: "laptopcomputer",
-      "Rental Income": "house.fill",
-      Salary: "banknote.fill",
-      Investments: "chart.line.uptrend.xyaxis",
-      Business: "building.2.fill",
-      Gift: "gift.fill",
-      Consulting: "person.2.fill",
-    };
-
-    return iconMap[category] || "circle.fill";
+const getCategoryIcon = (category: string): string => {
+  const iconMap = {
+    Bills: "cash",
+    Health: "heart",
+    Education: "book",
+    Travel: "airplane",
+    Entertainment: "television",
+    Shopping: "cart",
+    Groceries: "basket",
+    Transport: "car",
+    Bonus: "star",
+    Freelance: "laptop",
+    "Rental Income": "home",
+    Salary: "cash-multiple",
+    Investments: "chart-line-variant",
+    Business: "office-building",
+    Gift: "gift",
+    Consulting: "account-group",
   };
+
+  return iconMap[category] || "circle";
+};
 
   const getCategoryColor = (category: string): string => {
     const colorMap = {
@@ -76,16 +77,21 @@ export default function RecentTransactions() {
     <View style={styles.container}>
       <View style={styles.header}>
         <View style={styles.titleWrapper}>
-          <IconSymbol
-            name="chart.dots.scatter"
+       
+          <MaterialCommunityIcons
+            name="chart-scatter-plot"
             color={COLOURS.primary}
-            size={24}
+            size={20}
           />
+
           <Text style={styles.titleText}>Recent Transactions</Text>
         </View>
-        <TouchableOpacity style={styles.viewButton} onPress={() => {
-          router.push("/(tabs)/records");
-        }}>
+        <TouchableOpacity
+          style={styles.viewButton}
+          onPress={() => {
+            router.push("/(tabs)/records");
+          }}
+        >
           <Text style={styles.viewText}>See all</Text>
         </TouchableOpacity>
       </View>
@@ -140,11 +146,8 @@ const styles = StyleSheet.create({
       width: 0,
       height: 10,
     },
-    shadowOpacity: 0.15,
-    shadowRadius: 20,
-    elevation: 8,
-    borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.3)",
+
+
   },
   header: {
     flexDirection: "row",

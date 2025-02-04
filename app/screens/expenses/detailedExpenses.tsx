@@ -3,7 +3,8 @@ import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { COLOURS } from "@/constant/color";
-import { IconSymbol } from "@/components/IconSymbol";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+
 
 interface Expense {
   id: string;
@@ -36,7 +37,8 @@ export default function ExpenseDetailScreen() {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
-        <IconSymbol name="banknote.fill" size={24} color={COLOURS.primary} />
+      
+        <MaterialCommunityIcons name="cash" size={24} color={COLOURS.primary} />
         <Text style={styles.category}>{income.category}</Text>
       </View>
 

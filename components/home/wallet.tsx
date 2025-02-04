@@ -1,9 +1,9 @@
 import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
 import React, { useEffect, useState } from "react";
 import { IMAGES } from "@/assets/images";
-import { IconSymbol } from "../IconSymbol.ios";
 import { COLOURS } from "@/constant/color";
 import { manageIncomeData, manageExpensesData } from "@/utils/storage";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 // Format number to currency
 export const formatCurrency = (amount: number) => {
@@ -53,7 +53,11 @@ const Wallet = () => {
       {/* Outer Card Header */}
       <View style={styles.outerHeader}>
         <View style={styles.walletWrapper}>
-          <IconSymbol name="creditcard" color={COLOURS.grey} size={24} />
+          <MaterialCommunityIcons
+            name="credit-card"
+            color={COLOURS.primary}
+            size={24}
+          />
           <Text style={styles.titleText}>My Wallet</Text>
         </View>
       </View>

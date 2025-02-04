@@ -31,8 +31,8 @@ type TimeFilterType = "daily" | "weekly" | "monthly" | "yearly";
 
 const Statistics = () => {
   const defaultDate = dayjs();
-    const [totalIncome, setTotalIncome] = useState(0);
-    const [totalExpenses, setTotalExpenses] = useState(0);
+  const [totalIncome, setTotalIncome] = useState(0);
+  const [totalExpenses, setTotalExpenses] = useState(0);
   const [dateMode, setDateMode] = useState<DateModeType>("single");
   const [selectedDate, setSelectedDate] = useState<Dayjs>(defaultDate);
   const [timeFilter, setTimeFilter] = useState<TimeFilterType>("weekly");
@@ -97,7 +97,7 @@ const Statistics = () => {
       yearly: { income: 0, expenses: 0 },
     };
   };
- useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
       try {
         // Fetch income and expenses data
@@ -155,14 +155,6 @@ const Statistics = () => {
         <ScrollView style={styles.container}>
           <StatsDisplay totals={getTotals()} mode={dateMode} />
 
-          {/* <DateSelector
-          mode={dateMode}
-          date={selectedDate.toDate()}
-          startDate={dateRange.startDate?.toDate()}
-          endDate={dateRange.endDate?.toDate()}
-          onChange={handleDateChange}
-        /> */}
-
           <CategoryChart />
         </ScrollView>
       </SafeAreaView>
@@ -184,8 +176,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginHorizontal: 20,
-    marginTop: 20,
-    marginBottom: 10,
+    marginTop: 50,
+    marginBottom: 17,
   },
   incomeExpenseItem: {
     backgroundColor: "rgba(255, 255, 255, 0.5)",

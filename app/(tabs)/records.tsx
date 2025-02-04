@@ -9,55 +9,63 @@ import {
 import ExpensesScreen from "../screens/expenses";
 import IncomeScreen from "../screens/income";
 import { COLOURS } from "@/constant/color";
-import { IconSymbol } from "@/components/IconSymbol";
+import { StatusBar } from "expo-status-bar";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Records = () => {
   const [activeTab, setActiveTab] = useState("expenses");
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.tabBar}>
-        <TouchableOpacity
-          style={[styles.tabItem, activeTab === "expenses" && styles.activeTab]}
-          onPress={() => setActiveTab("expenses")}
-        >
-          <IconSymbol
-            name="arrow.down.circle.fill"
-            size={20}
-            color={activeTab === "expenses" ? COLOURS.primary : "#666"}
-          />
-          <Text
+    <>
+      <StatusBar style="dark" />
+      <SafeAreaView style={styles.container}>
+        <View style={styles.tabBar}>
+          <TouchableOpacity
             style={[
-              styles.tabText,
-              activeTab === "expenses" && styles.activeTabText,
+              styles.tabItem,
+              activeTab === "expenses" && styles.activeTab,
             ]}
+            onPress={() => setActiveTab("expenses")}
           >
-            Expenses
-          </Text>
-        </TouchableOpacity>
+            <MaterialCommunityIcons
+              name="arrow-down-circle"
+              size={24}
+              color={activeTab === "expenses" ? COLOURS.primary : "#666"}
+            />
+            <Text
+              style={[
+                styles.tabText,
+                activeTab === "expenses" && styles.activeTabText,
+              ]}
+            >
+              Expenses
+            </Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity
-          style={[styles.tabItem, activeTab === "income" && styles.activeTab]}
-          onPress={() => setActiveTab("income")}
-        >
-          <IconSymbol
-            name="arrow.up.circle.fill"
-            size={20}
-            color={activeTab === "income" ? COLOURS.primary : "#666"}
-          />
-          <Text
-            style={[
-              styles.tabText,
-              activeTab === "income" && styles.activeTabText,
-            ]}
+          <TouchableOpacity
+            style={[styles.tabItem, activeTab === "income" && styles.activeTab]}
+            onPress={() => setActiveTab("income")}
           >
-            Income
-          </Text>
-        </TouchableOpacity>
-      </View>
+   
+            <MaterialCommunityIcons
+              name="arrow-up-circle"
+              size={24}
+              color={activeTab === "income" ? COLOURS.primary : "#666"}
+            />
+            <Text
+              style={[
+                styles.tabText,
+                activeTab === "income" && styles.activeTabText,
+              ]}
+            >
+              Income
+            </Text>
+          </TouchableOpacity>
+        </View>
 
-      {activeTab === "expenses" ? <ExpensesScreen /> : <IncomeScreen />}
-    </SafeAreaView>
+        {activeTab === "expenses" ? <ExpensesScreen /> : <IncomeScreen />}
+      </SafeAreaView>
+    </>
   );
 };
 
@@ -73,6 +81,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 12,
     backgroundColor: "white",
+    marginTop: 27,
     borderBottomWidth: 3,
     borderBottomColor: "rgba(0, 0, 0, 0.05)",
   },

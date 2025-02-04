@@ -57,7 +57,7 @@ const Login = () => {
           <Text style={styles.label}>Username</Text>
           <TextInput
             style={styles.input}
-            placeholder="Enter any username to sign. No auth required"
+            placeholder="Enter any username to sign. No auth"
             placeholderTextColor={COLOURS.grey}
             autoCapitalize="none"
             value={username}

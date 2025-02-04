@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { SymbolView } from "expo-symbols";
 import { COLOURS } from "@/constant/color";
-import { IconSymbol } from "../IconSymbol.ios";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export interface TransactionCardProps {
   id: string;
@@ -31,7 +31,8 @@ const TransactionCard: React.FC<TransactionCardProps> = ({
     <TouchableOpacity style={styles.card} onPress={onPress}>
       {/* Left Side Icon */}
       <View style={styles.iconContainer}>
-        <IconSymbol name={icon} color={iconColor} size={24} />
+
+        <MaterialCommunityIcons name={icon} color={iconColor} size={20} />
       </View>
 
       {/* Transaction Details */}
@@ -64,13 +65,14 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 16,
     marginVertical: 8,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 12,
-    elevation: 5,
+    // shadowColor: "#000",
+    // shadowOffset: { width: 0, height: 4 },
+    // shadowOpacity: 0.1,
+   
+
     borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.18)",
+    borderColor: COLOURS.secondary,
+  
     backdropFilter: "blur(10px)",
   },
   iconContainer: {

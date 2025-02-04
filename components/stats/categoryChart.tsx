@@ -254,7 +254,7 @@ const CategoryChart: React.FC = () => {
                 },
               ],
             }}
-            width={Dimensions.get("window").width - 20}
+            width={Dimensions.get("window").width - 30}
             height={250}
             chartConfig={{
               ...chartConfig,
@@ -285,7 +285,8 @@ const styles = StyleSheet.create({
     borderRadius: 24,
     borderWidth: 1,
     borderColor: "#F7F2FA",
-    margin: 16,
+    padding: 6,
+    margin: 10,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
