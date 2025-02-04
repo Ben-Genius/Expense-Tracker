@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, SafeAreaView } from "react-native";
+import { View, StyleSheet, SafeAreaView, ScrollView } from "react-native";
 import dayjs, { Dayjs } from "dayjs";
 import { DateSelector } from "@/components/stats/dateSelector";
 import { StatsDisplay } from "@/components/stats/statsDisplay";
@@ -10,6 +10,7 @@ import {
   calculateYearlyTotals,
 } from "@/utils/calculateIncomeExpense";
 import { AllTotals, DateRange } from "@/utils/type";
+import CategoryChart from "@/components/stats/categoryChart";
 
 // Define the types for totals data
 
@@ -60,8 +61,10 @@ const Statistics = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      {/* <DateSelector
+    <SafeAreaView>
+      <ScrollView>
+        <CategoryChart />
+        {/* <DateSelector
         mode={dateMode}
         date={selectedDate.toDate()}
         startDate={dateRange.startDate?.toDate()}
@@ -69,7 +72,8 @@ const Statistics = () => {
         onChange={handleDateChange}
       /> */}
 
-      <StatsDisplay totals={getTotals()} mode={dateMode} />
+        <StatsDisplay totals={getTotals()} mode={dateMode} />
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -77,7 +81,7 @@ const Statistics = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+  
   },
 });
 

@@ -4,6 +4,7 @@ import { PieChart, BarChart } from "react-native-chart-kit";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import { COLOURS } from "@/constant/color";
+import { chartConfig } from "@/constant/chartConfig";
 
 interface Transaction {
   id: number;
@@ -160,12 +161,7 @@ const CategoryChart: React.FC = () => {
           accessor="amount"
           backgroundColor="transparent"
           paddingLeft="15"
-          chartConfig={{
-            backgroundGradientFrom: "#fff",
-            backgroundGradientTo: "#fff",
-            decimalPlaces: 2,
-            color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-          }}
+          chartConfig={chartConfig}
           style={styles.chart}
         />
 
@@ -178,14 +174,9 @@ const CategoryChart: React.FC = () => {
           }}
           width={Dimensions.get("window").width - 20}
           height={250}
-          chartConfig={{
-            backgroundGradientFrom: "#fff",
-            backgroundGradientTo: "#fff",
-            decimalPlaces: 2,
-            color: (opacity = 1) => `rgba(0, 100, 255, ${opacity})`,
-          }}
+          chartConfig={chartConfig}
           style={styles.chart}
-          yAxisLabel=""
+          yAxisLabel="$"
           yAxisSuffix=""
         />
 
