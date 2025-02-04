@@ -1,45 +1,80 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
-import { Platform } from 'react-native';
-
-import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import { Tabs } from "expo-router";
+import React from "react";
+import { Platform, StyleSheet } from "react-native";
+import { COLOURS } from "@/constant/color";
+import { SymbolView, SymbolViewProps, SFSymbol } from "expo-symbols";
+import { IconSymbol } from "@/components/IconSymbol.ios";
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        tabBarActiveTintColor: COLOURS.primary,
+        tabBarInactiveTintColor: COLOURS.grey,
         headerShown: false,
-        tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
         tabBarStyle: Platform.select({
           ios: {
             // Use a transparent background on iOS to show the blur effect
-            position: 'absolute',
+            position: "absolute",
           },
           default: {},
         }),
-      }}>
+      }}
+    >
       <Tabs.Screen
-        name="index"
+        name="home"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          title: "Home",
+          tabBarIcon: ({ color }) => (
+            <IconSymbol size={28} name="house" color={color} />
+          ),
+
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="stats"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: "Statistics",
+          tabBarIcon: ({ focused }) => (
+            <SymbolView
+              name="chart.xyaxis.line"
+              style={styles.symbol}
+              type="hierarchical"
+              resizeMode="scaleAspectFit"
+              tintColor={focused ? COLOURS.primary : COLOURS.grey}
+              colors={[focused ? COLOURS.primary : COLOURS.grey]} // Fix here!
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="budget"
+        options={{
+          title: "Budget",
+          tabBarIcon: ({ color }) => (
+            <IconSymbol size={28} name="banknote" color={color} />
+          ),
+  
+        }}
+      />
+      <Tabs.Screen
+        name="settings"
+        options={{
+          title: "Settings",
+          tabBarIcon: ({ color }) => (
+            <IconSymbol size={28} name="filemenu.and.selection" color={color} />
+          ),
+    
         }}
       />
     </Tabs>
   );
 }
+
+const styles = StyleSheet.create({
+  symbol: {
+    width: 35,
+    height: 35,
+    margin: 5,
+  },
+});
