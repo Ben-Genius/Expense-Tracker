@@ -30,8 +30,8 @@ export const StatsDisplay: React.FC<StatsDisplayProps> = ({ totals, mode }) => {
 const StatCard: React.FC<StatCardProps> = ({ title, data }) => (
   <View style={styles.card}>
     <Text style={styles.title}>{title}</Text>
-    <Text style={styles.amount}>Income: ${data.income.toFixed(2)}</Text>
-    <Text style={styles.amount}>Expenses: ${data.expenses.toFixed(2)}</Text>
+    <Text style={styles.amount}>Income: ${data.income?.toFixed(2)}</Text>
+    <Text style={styles.amount}>Expenses: ${data.expenses?.toFixed(2)}</Text>
     <Text style={styles.balance}>
       Balance: ${(data.income - data.expenses).toFixed(2)}
     </Text>

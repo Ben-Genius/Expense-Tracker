@@ -25,21 +25,15 @@ const Statistics = () => {
   });
 
  const handleDateChange = (
-   value: Date | { startDate: Date | null; endDate: Date | null }
- ) => {
-   if (dateMode === "single" && value instanceof Date) {
-     setSelectedDate(dayjs(value));
-   } else if (
-     dateMode === "range" &&
-     "startDate" in value &&
-     value.startDate &&
-     value.endDate
-   ) {
-     setDateRange({
-       startDate: dayjs(value.startDate),
-       endDate: dayjs(value.endDate),
-     });
-   }
+   value: any) => {
+    if (dateMode === "single" && value.date) {
+      setSelectedDate(dayjs(value.date));
+    } else if (dateMode === "range" && value.startDate && value.endDate) {
+      setDateRange({
+        startDate: dayjs(value.startDate),
+        endDate: dayjs(value.endDate),
+      });
+    }
  };
 
 
@@ -67,13 +61,13 @@ const Statistics = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <DateSelector
+      {/* <DateSelector
         mode={dateMode}
-        date={selectedDate?.toDate() ?? new Date()}
-        startDate={dateRange.startDate?.toDate() ?? null}
-        endDate={dateRange.endDate?.toDate() ?? null}
+        date={selectedDate.toDate()}
+        startDate={dateRange.startDate?.toDate()}
+        endDate={dateRange.endDate?.toDate()}
         onChange={handleDateChange}
-      />
+      /> */}
 
       <StatsDisplay totals={getTotals()} mode={dateMode} />
     </SafeAreaView>
