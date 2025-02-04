@@ -12,13 +12,44 @@ export const isOnboardingCompleted = async (): Promise<boolean> => {
 
 // Set onboarding as completed
 export const setOnboardingCompleted = async (): Promise<void> => {
+  console.log("Setting onboarding completed");
   await AsyncStorage.setItem(ONBOARDING_COMPLETED_KEY, "true");
 };
 
 const storeData = async () => {
   await AsyncStorage.setItem("expenses", JSON.stringify(expenseData));
-    await AsyncStorage.setItem("expenses", JSON.stringify(incomeData));
-
+  await AsyncStorage.setItem("income", JSON.stringify(incomeData));
 };
 
 storeData();
+
+// Add function to manage expenses data
+export const manageExpensesData = async () => {
+  try {
+    const storedExpenses = await AsyncStorage.getItem("expenses");
+    if (!storedExpenses) {
+      // Initialize with dummy data if no data exists
+      await AsyncStorage.setItem("expenses", JSON.stringify(expenseData));
+      return expenseData;
+    }
+    return JSON.parse(storedExpenses);
+  } catch (error) {
+    console.error("Error managing expenses data:", error);
+    return expenseData;
+  }
+};
+
+export const manageIncomeData = async () => {
+  try {
+    const storedIncome = await AsyncStorage.getItem("income");
+    if (!storedIncome) {
+      // Initialize with dummy data if no data exists
+      await AsyncStorage.setItem("income", JSON.stringify(incomeData));
+      return incomeData;
+    }
+    return JSON.parse(storedIncome);
+  } catch (error) {
+    console.error("Error managing income data:", error);
+    return incomeData;
+  }
+};

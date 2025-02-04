@@ -5,11 +5,27 @@ import {
   useWindowDimensions,
   Text,
 } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { COLOURS } from "@/constant/color";
 import { IMAGES } from "@/assets/images";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Avatar = () => {
+  const [userName, setUserName] = useState(""); // State to store the username
+  const { width } = useWindowDimensions();
+
+  useEffect(() => {
+    // Fetch the stored username from AsyncStorage
+    const fetchUserName = async () => {
+      const name = await AsyncStorage.getItem("userName");
+      if (name) {
+        setUserName(name);
+      }
+    };
+
+    fetchUserName();
+  }, []);
+
   const getGreeting = () => {
     const hours = new Date().getHours();
     if (hours < 12) return "Good Morning";
@@ -17,7 +33,6 @@ const Avatar = () => {
     return "Good Evening";
   };
 
-  const { width } = useWindowDimensions();
   return (
     <View
       style={{
@@ -48,12 +63,12 @@ const Avatar = () => {
           style={{
             fontSize: 16,
             color: COLOURS.darkGrey,
-                      // textAlign: "center",
-            marginVertical:3,
+            marginVertical: 3,
             fontWeight: "500",
           }}
         >
-          Azay Genius
+          {userName || "Guest"}{" "}
+          {/* Display the username or "Guest" if not available */}
         </Text>
       </View>
     </View>
@@ -74,7 +89,6 @@ const styles = StyleSheet.create({
   },
   container2: {
     backgroundColor: COLOURS.white,
-    //   padding: 2,
     width: 45,
     height: 45,
     borderRadius: 50,

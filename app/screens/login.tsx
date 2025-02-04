@@ -7,17 +7,33 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import { IMAGES } from "../../assets/images/index";
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "expo-router";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { COLOURS } from "@/constant/color";
 
 const Login = () => {
   const { height, width } = useWindowDimensions();
   const router = useRouter();
+  const [username, setUsername] = useState(""); // State to store username input
+  const [error, setError] = useState(""); // State to store error message
 
-  const handleSignIn = () => {
-    router.replace("/(tabs)/home"); // Redirect to the home page in the bottomTab folder
+  const handleSignIn = async () => {
+    // Validate the username field
+    if (!username.trim()) {
+      setError("Username is required"); // Set error message if username is empty
+      return;
+    }
+
+    // Clear any previous error
+    setError("");
+
+    // Store the username in AsyncStorage
+    await AsyncStorage.setItem("userName", username);
+    router.replace("/(tabs)/home"); // Redirect to the home page
   };
 
   return (
@@ -36,16 +52,21 @@ const Login = () => {
 
       {/* Form */}
       <View style={styles.formContainer}>
-        {/* Email Input */}
+        {/* Username Input */}
         <View style={styles.inputContainer}>
-          <Text style={styles.label}>Email</Text>
+          <Text style={styles.label}>Username</Text>
           <TextInput
             style={styles.input}
-            placeholder="Enter your email"
-            placeholderTextColor="#999"
-            keyboardType="email-address"
+            placeholder="Enter any username to sign. No auth required"
+            placeholderTextColor={COLOURS.grey}
             autoCapitalize="none"
+            value={username}
+            onChangeText={(text) => {
+              setUsername(text); // Update username state
+              setError(""); // Clear error when user starts typing
+            }}
           />
+          {error ? <Text style={styles.errorText}>{error}</Text> : null}
         </View>
 
         {/* Password Input */}
@@ -60,7 +81,14 @@ const Login = () => {
         </View>
 
         {/* Sign In Button */}
-        <TouchableOpacity style={styles.signInButton} onPress={handleSignIn}>
+        <TouchableOpacity
+          style={[
+            styles.signInButton,
+            !username.trim() && styles.disabledButton, // Disable button if username is empty
+          ]}
+          onPress={handleSignIn}
+          disabled={!username.trim()} // Disable button if username is empty
+        >
           <Text style={styles.signInButtonText}>Sign In</Text>
         </TouchableOpacity>
 
@@ -88,7 +116,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
     width: "100%",
-   
   },
   image: {
     height: 150,
@@ -139,6 +166,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 20,
   },
+  disabledButton: {
+    backgroundColor: "#a0d8f5", // Lighter color when disabled
+  },
   signInButtonText: {
     fontSize: 17,
     fontWeight: "bold",
@@ -165,5 +195,10 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#38bdf8",
     fontWeight: "bold",
+  },
+  errorText: {
+    fontSize: 14,
+    color: "red",
+    marginTop: 5,
   },
 });

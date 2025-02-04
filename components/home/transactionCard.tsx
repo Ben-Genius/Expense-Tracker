@@ -1,17 +1,20 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { SymbolView } from "expo-symbols";
 import { COLOURS } from "@/constant/color";
 import { IconSymbol } from "../IconSymbol.ios";
 
 export interface TransactionCardProps {
+  id: string;
   icon: any;
   title: string;
   description: string;
   amount: number;
   date: string;
+  category: string;
   type: string;
   iconColor: string;
+  onPress?: () => void;
 }
 
 const TransactionCard: React.FC<TransactionCardProps> = ({
@@ -22,9 +25,10 @@ const TransactionCard: React.FC<TransactionCardProps> = ({
   date,
   type,
   iconColor,
+  onPress
 }) => {
   return (
-    <View style={styles.card}>
+    <TouchableOpacity style={styles.card} onPress={onPress}>
       {/* Left Side Icon */}
       <View style={styles.iconContainer}>
         <IconSymbol name={icon} color={iconColor} size={24} />
@@ -48,7 +52,7 @@ const TransactionCard: React.FC<TransactionCardProps> = ({
         </Text>
         <Text style={styles.date}>{date}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

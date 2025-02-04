@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
 import { IconSymbol } from "../IconSymbol.ios";
 import { COLOURS } from "@/constant/color";
 import { incomeData, expenseData } from "@/constant/dummy_data";
+import { router } from "expo-router";
 
 const AnalyticsCard = () => {
   const [activeTab, setActiveTab] = useState("Monthly");
@@ -94,7 +95,9 @@ const AnalyticsCard = () => {
           <IconSymbol name="chart.bar.fill" color={COLOURS.grey} size={24} />
           <Text style={styles.titleText}>Analytics</Text>
         </View>
-        <TouchableOpacity style={styles.viewButton}>
+        <TouchableOpacity style={styles.viewButton} onPress={() => {
+                  router.push("/(tabs)/stats");
+                }}>
           <Text style={styles.viewText}>View</Text>
         </TouchableOpacity>
       </View>

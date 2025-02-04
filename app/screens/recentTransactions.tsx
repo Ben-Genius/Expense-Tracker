@@ -11,6 +11,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import TransactionCard from "@/components/home/transactionCard";
 import { expenseData, incomeData } from "@/constant/dummy_data";
 import { IconSymbol } from "@/components/IconSymbol.ios";
+import { router } from "expo-router";
 
 export default function RecentTransactions() {
   const [transactions, setTransactions] = useState([]);
@@ -82,7 +83,9 @@ export default function RecentTransactions() {
           />
           <Text style={styles.titleText}>Recent Transactions</Text>
         </View>
-        <TouchableOpacity style={styles.viewButton}>
+        <TouchableOpacity style={styles.viewButton} onPress={() => {
+          router.push("/(tabs)/records");
+        }}>
           <Text style={styles.viewText}>See all</Text>
         </TouchableOpacity>
       </View>
@@ -107,7 +110,18 @@ export default function RecentTransactions() {
             amount={item.amount}
             iconColor={getCategoryColor(item.category)}
             date={item.date}
+            onPress={() =>
+              router.push({
+                pathname: "/screens/detailScreen",
+                params: {
+                  id: item.id,
+                  type: "income", // or whatever type you want to pass
+                },
+              })
+            }
             type={item.type || "expense" || "income"}
+            id={""}
+            category={""}
           />
         )
       )}

@@ -1,10 +1,53 @@
 import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { IMAGES } from "@/assets/images";
 import { IconSymbol } from "../IconSymbol.ios";
 import { COLOURS } from "@/constant/color";
+import { manageIncomeData, manageExpensesData } from "@/utils/storage";
 
+// Format number to currency
+export const formatCurrency = (amount: number) => {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  }).format(amount);
+};
 const Wallet = () => {
+  const [totalIncome, setTotalIncome] = useState(0);
+  const [totalExpenses, setTotalExpenses] = useState(0);
+  const [balance, setBalance] = useState(0);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Fetch income and expenses data
+        const incomeData = await manageIncomeData();
+        const expensesData = await manageExpensesData();
+
+        // Calculate total income
+        const calculatedIncome = incomeData.reduce(
+          (sum: number, item: any) => sum + parseFloat(item.amount),
+          0
+        );
+
+        // Calculate total expenses
+        const calculatedExpenses = expensesData.reduce(
+          (sum: number, item: any) => sum + parseFloat(item.amount),
+          0
+        );
+
+        // Set the states
+        setTotalIncome(calculatedIncome);
+        setTotalExpenses(calculatedExpenses);
+        setBalance(calculatedIncome - calculatedExpenses);
+      } catch (error) {
+        console.error("Error fetching wallet data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <View style={styles.parentContainer}>
       {/* Outer Card Header */}
@@ -13,29 +56,29 @@ const Wallet = () => {
           <IconSymbol name="creditcard" color={COLOURS.grey} size={24} />
           <Text style={styles.titleText}>My Wallet</Text>
         </View>
-        <TouchableOpacity style={styles.viewButton}>
-          <Text style={styles.viewText}>View</Text>
-        </TouchableOpacity>
       </View>
 
       {/* Balance Card */}
       <View style={styles.balanceWrapper}>
         <View style={styles.balanceHeader}>
           <Text style={styles.balanceLabel}>Total Balance</Text>
-          {/* <Image source={view} style={styles.eyeIcon} resizeMode="contain" /> */}
         </View>
-        <Text style={styles.balanceAmount}>$ 50000</Text>
+        <Text style={styles.balanceAmount}>{formatCurrency(balance)}</Text>
       </View>
 
       {/* Action Buttons */}
       <View style={styles.incomeExpenseContainer}>
         <View style={styles.incomeExpenseItem}>
           <Text style={styles.incomeExpenseLabel}>INCOME</Text>
-          <Text style={styles.incomeExpenseAmount}>$ 90,000</Text>
+          <Text style={styles.incomeExpenseAmount}>
+            {formatCurrency(totalIncome)}
+          </Text>
         </View>
         <View style={styles.incomeExpenseItem}>
           <Text style={styles.incomeExpenseLabel}>EXPENSES</Text>
-          <Text style={styles.incomeExpenseAmount}>$ 30,000</Text>
+          <Text style={styles.incomeExpenseAmount}>
+            {formatCurrency(totalExpenses)}
+          </Text>
         </View>
       </View>
     </View>
@@ -170,7 +213,6 @@ const styles = StyleSheet.create({
     borderColor: "rgba(255, 255, 255, 0.18)",
   },
   incomeExpenseLabel: {
-
     fontSize: 14,
     fontWeight: "600",
     textAlign: "center",
