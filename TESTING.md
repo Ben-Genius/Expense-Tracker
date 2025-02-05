@@ -5,7 +5,7 @@ This document provides step-by-step instructions on **how to test the Expense Tr
 ## 🚀 Getting Started
 
 ### **1️⃣ Install Dependencies**
-Clone  the specific repo(IOs or android) anad Run the following command to install all required packages:
+Clone  the specific repo (iOS or android) and Run the following command to install all required packages:
 - **iOS Version**: [GitHub Repo](https://github.com/Ben-Genius/Expense-Tracker.git)
 - **Android Version**: [GitHub Repo](https://github.com/Ben-Genius/Expense-Tracker/tree/androidVersion)
 
