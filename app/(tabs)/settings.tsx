@@ -75,8 +75,7 @@ const Setting: React.FC = () => {
           <SettingsItem
             title="Profile"
             subtitle="Edit user details & avatar"
-            icon="person.crop.circle"
-            // onPress={() => router.push("/screens/settings/profile")}
+            icon="account-circle"
             color={COLOURS.primary}
           />
         </SettingsSection>
@@ -85,20 +84,17 @@ const Setting: React.FC = () => {
           <SettingsItem
             title="Preferences"
             subtitle="Theme, Currency, Notifications"
-            icon="gearshape"
-            // onPress={() => router.push("/screens/settings/preferences")}
+            icon="cog"
           />
           <SettingsItem
             title="Privacy & Data"
             subtitle="Clear transactions, reset app, backup"
-            icon="lock.shield"
-            // onPress={() => router.push("/screens/settings/privacy")}
+            icon="shield-lock"
           />
           <SettingsItem
             title="About"
             subtitle="App version, developer info"
-            icon="info.circle"
-            // onPress={() => router.push("/screens/settings/about")}
+            icon="information"
             isLast
           />
         </SettingsSection>
@@ -107,7 +103,7 @@ const Setting: React.FC = () => {
           <SettingsItem
             title="Logout"
             subtitle="Sign out from the app"
-            icon="arrow.right.circle.fill"
+            icon="logout"
             color={COLOURS.red}
             onPress={() => router.replace("/screens/logout")}
           />

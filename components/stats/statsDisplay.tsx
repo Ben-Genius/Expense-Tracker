@@ -9,7 +9,7 @@ import { View, Text, StyleSheet, Dimensions, ScrollView } from "react-native";
 import { Ionicons } from "@expo/vector-icons"; // Importing Expo Icons
 import { BlurView } from "expo-blur"; // Add this import
 import { COLOURS } from "@/constant/color";
-import { IconSymbol } from "../IconSymbol";
+
 
 // Utility function to check if totals is of type PeriodTotals
 const isPeriodTotals = (
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   },
 
   card: {
-    width: Dimensions.get("window").width - 200,
+    width: Dimensions.get("window").width - 150,
     marginHorizontal: 10,
     padding: 16,
     borderColor: COLOURS.primary,

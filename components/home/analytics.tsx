@@ -4,6 +4,7 @@ import { IconSymbol } from "../IconSymbol.ios";
 import { COLOURS } from "@/constant/color";
 import { incomeData, expenseData } from "@/constant/dummy_data";
 import { router } from "expo-router";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const AnalyticsCard = () => {
   const [activeTab, setActiveTab] = useState("Monthly");
@@ -93,11 +94,20 @@ const AnalyticsCard = () => {
       <View style={styles.header}>
         <View style={styles.titleWrapper}>
           <IconSymbol name="chart.bar.fill" color={COLOURS.grey} size={24} />
+          <MaterialCommunityIcons
+            name="chart-bar"
+            color={COLOURS.primary}
+            size={24}
+          />
+
           <Text style={styles.titleText}>Analytics</Text>
         </View>
-        <TouchableOpacity style={styles.viewButton} onPress={() => {
-                  router.push("/(tabs)/stats");
-                }}>
+        <TouchableOpacity
+          style={styles.viewButton}
+          onPress={() => {
+            router.push("/(tabs)/stats");
+          }}
+        >
           <Text style={styles.viewText}>View</Text>
         </TouchableOpacity>
       </View>
@@ -131,7 +141,11 @@ const AnalyticsCard = () => {
           <Text style={styles.dataLabel}>Income</Text>
           <View style={styles.valueContainer}>
             <View style={styles.arrowContainerGreen}>
-              <IconSymbol name="arrow.up" color={COLOURS.green} size={17} />
+              <MaterialCommunityIcons
+                name="arrow-up"
+                color={COLOURS.orange}
+                size={19}
+              />
             </View>
             <Text style={styles.valueText}>
               ${currentValues.income.toLocaleString()}
@@ -143,7 +157,11 @@ const AnalyticsCard = () => {
           <Text style={styles.dataLabel}>Expenses</Text>
           <View style={styles.valueContainer}>
             <View style={styles.arrowContainerOrange}>
-              <IconSymbol name="arrow.down" color={COLOURS.orange} size={17} />
+              <MaterialCommunityIcons
+                name="arrow-down"
+                color={COLOURS.orange}
+                size={18}
+              />
             </View>
             <Text style={styles.valueText}>
               ${currentValues.expense.toLocaleString()}
@@ -213,7 +231,7 @@ const styles = StyleSheet.create({
   },
   dataSection: {
     flex: 1,
-    padding: 10, // Added new padding
+    padding: 8, // Added new padding
   },
   dataLabel: {
     fontSize: 16,
@@ -224,7 +242,7 @@ const styles = StyleSheet.create({
   valueContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: 8, // Added new spacing
+    marginTop: 5, // Added new spacing
   },
   arrowContainerGreen: {
     backgroundColor: "#E8F5E9",
@@ -233,7 +251,7 @@ const styles = StyleSheet.create({
     height: 42, // Increased from 36
     justifyContent: "center",
     alignItems: "center",
-    marginRight: 16, // Increased from 12
+    marginLeft: -10, // Increased from 12
   },
   arrowContainerOrange: {
     backgroundColor: "#FFF3E0",
@@ -242,7 +260,7 @@ const styles = StyleSheet.create({
     height: 42, // Increased from 36
     justifyContent: "center",
     alignItems: "center",
-    marginRight: 16, // Increased from 12
+    marginLeft: 9, // Increased from 12
   },
   titleText: {
     fontSize: 16,
@@ -299,6 +317,7 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     color: "#000000",
     letterSpacing: -0.5,
+    marginLeft: 3,
   },
 });
 

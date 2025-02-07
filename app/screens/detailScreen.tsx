@@ -12,7 +12,8 @@ import {
 import { useLocalSearchParams, useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { COLOURS } from "@/constant/color";
-import { IconSymbol } from "@/components/IconSymbol";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+
 
 interface Transaction {
   id: string;
@@ -100,22 +101,24 @@ export default function DetailScreen() {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
-        <IconSymbol
-          name={type === "income" ? "banknote.fill" : "cart.fill"}
+        <MaterialCommunityIcons
+          name={type === "income" ? "cash" : "cart"}
           size={24}
           color={COLOURS.primary}
         />
         <Text style={styles.category}>{data.category}</Text>
         <View style={styles.actions}>
           <TouchableOpacity onPress={() => setIsEditing(!isEditing)}>
-            <IconSymbol
-              name={isEditing ? "checkmark.circle.fill" : "pencil.circle.fill"}
+        
+            <MaterialCommunityIcons
+              name={isEditing ? "check" : "pencil-circle-outline"}
               size={24}
               color={COLOURS.primary}
             />
           </TouchableOpacity>
           <TouchableOpacity onPress={handleDelete}>
-            <IconSymbol name="trash.fill" size={24} color="red" />
+   
+            <MaterialCommunityIcons name="trash-can" size={24} color="red" />
           </TouchableOpacity>
         </View>
       </View>

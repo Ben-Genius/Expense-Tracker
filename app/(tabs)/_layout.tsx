@@ -2,8 +2,7 @@ import { Tabs } from "expo-router";
 import React from "react";
 import { Platform, StyleSheet } from "react-native";
 import { COLOURS } from "@/constant/color";
-import { SymbolView, SymbolViewProps, SFSymbol } from "expo-symbols";
-import { IconSymbol } from "@/components/IconSymbol.ios";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function TabLayout() {
   return (
@@ -14,10 +13,12 @@ export default function TabLayout() {
         headerShown: false,
         tabBarStyle: Platform.select({
           ios: {
-            // Use a transparent background on iOS to show the blur effect
             position: "absolute",
           },
-          default: {},
+          default: {
+            elevation: 4,
+            backgroundColor: "#fff",
+          },
         }),
       }}
     >
@@ -25,24 +26,20 @@ export default function TabLayout() {
         name="home"
         options={{
           title: "Home",
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="house" color={color} />
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home" size={size} color={color} />
           ),
-
         }}
       />
       <Tabs.Screen
         name="stats"
         options={{
           title: "Statistics",
-          tabBarIcon: ({ focused }) => (
-            <SymbolView
-              name="chart.xyaxis.line"
-              style={styles.symbol}
-              type="hierarchical"
-              resizeMode="scaleAspectFit"
-              tintColor={focused ? COLOURS.primary : COLOURS.grey}
-              colors={[focused ? COLOURS.primary : COLOURS.grey]} // Fix here!
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons
+              name="chart-line"
+              size={size}
+              color={color}
             />
           ),
         }}
@@ -51,20 +48,18 @@ export default function TabLayout() {
         name="records"
         options={{
           title: "Records",
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="banknote" color={color} />
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="cash" size={size} color={color} />
           ),
-  
         }}
       />
       <Tabs.Screen
         name="settings"
         options={{
           title: "Settings",
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="filemenu.and.selection" color={color} />
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="cog" size={size} color={color} />
           ),
-    
         }}
       />
     </Tabs>

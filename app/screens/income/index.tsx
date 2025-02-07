@@ -9,9 +9,10 @@ import {
 import { COLOURS } from "@/constant/color";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import TransactionCard from "@/components/home/transactionCard";
-import { IconSymbol } from "@/components/IconSymbol";
+
 import { useFocusEffect, useRouter } from "expo-router";
 import { manageIncomeData } from "@/utils/storage";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 interface Income {
   id: string;
@@ -23,13 +24,22 @@ interface Income {
 }
 
 const categoryIcons = {
-  Salary: "banknote.fill",
-  Freelance: "laptopcomputer",
-  Investments: "chart.line.uptrend.xyaxis",
-  Business: "building.2.fill",
-  Rental: "house.fill",
-  Bonus: "star.fill",
-  Gift: "gift.fill",
+  Bills: "cash",
+  Health: "heart",
+  Education: "book",
+  Travel: "airplane",
+  Entertainment: "television",
+  Shopping: "cart",
+  Groceries: "basket",
+  Transport: "car",
+  Bonus: "star",
+  Freelance: "laptop",
+  "Rental Income": "home",
+  Salary: "cash-multiple",
+  Investments: "chart-line-variant",
+  Business: "office-building",
+  Gift: "gift",
+  Consulting: "account-group",
   Other: "plus.circle.fill",
 } as const;
 
@@ -78,10 +88,11 @@ export default function IncomeScreen() {
     <View style={styles.container}>
       <View style={styles.header}>
         <View style={styles.titleWrapper}>
-          <IconSymbol
-            name="chart.dots.scatter"
-            color={COLOURS.primary}
+
+          <MaterialCommunityIcons
+            name="chart-scatter-plot"
             size={24}
+            color={COLOURS.primary}
           />
           <Text style={styles.titleText}>All Income</Text>
         </View>
@@ -89,11 +100,8 @@ export default function IncomeScreen() {
           style={styles.addButton}
           onPress={() => router.push("/screens/income/addIncome")}
         >
-          <IconSymbol
-            name="plus.circle.fill"
-            color={COLOURS.primary}
-            size={24}
-          />
+   
+          <MaterialCommunityIcons name="plus-circle" size={24} color={COLOURS.primary} />
         </TouchableOpacity>
       </View>
 
@@ -115,9 +123,10 @@ export default function IncomeScreen() {
                 pathname: "/screens/detailScreen",
                 params: {
                   id: item.id,
-                  type: "income"  // or whatever type you want to pass
-                }
-              })}
+                  type: "income", // or whatever type you want to pass
+                },
+              })
+            }
           />
         ))}
       </ScrollView>
@@ -130,21 +139,16 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(255, 255, 255, 0.75)",
     padding: 14,
     shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 10,
-    },
-    shadowOpacity: 0.15,
-    shadowRadius: 20,
-    elevation: 8,
-    borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.3)",
   },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 16,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    backgroundColor: "white",
+    borderBottomWidth: 1,
+    borderBottomColor: "#F0F0F0",
   },
   titleWrapper: {
     flexDirection: "row",
@@ -157,7 +161,7 @@ const styles = StyleSheet.create({
     color: "#000000",
   },
   addButton: {
-    backgroundColor: "#F8F9FA",
+    backgroundColor: COLOURS.lightGrey,
     borderRadius: 12,
     padding: 8,
   },

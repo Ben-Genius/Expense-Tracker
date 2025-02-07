@@ -40,6 +40,7 @@ const Avatar = () => {
         flexDirection: "row",
         alignItems: "center",
         gap: 10,
+
       }}
     >
       <View style={styles.container}>

@@ -9,7 +9,8 @@ import {
 } from "react-native";
 import { SymbolView } from "expo-symbols";
 import { COLOURS } from "@/constant/color";
-import { IconSymbol } from "../IconSymbol";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+
 
 interface SettingsItemProps {
   title: string;
@@ -74,7 +75,7 @@ const SettingsItem: React.FC<SettingsItemProps> = ({
               { backgroundColor: getBackgroundColor(color) },
             ]}
           >
-            <IconSymbol name={icon} style={styles.icon} color={color} />
+            <MaterialCommunityIcons name={icon} style={styles.icon} color={color} size={20} />
           </View>
           <View style={styles.textContainer}>
             <Text style={[styles.title, { color }]}>{title}</Text>
@@ -85,7 +86,7 @@ const SettingsItem: React.FC<SettingsItemProps> = ({
             )}
           </View>
 
-          <IconSymbol name="chevron.right" style={styles.chevron} color={COLOURS.grey} />
+          <MaterialCommunityIcons name="chevron-right" style={styles.chevron} color={COLOURS.grey} size={20} />
         </View>
       </TouchableOpacity>
     </Animated.View>
